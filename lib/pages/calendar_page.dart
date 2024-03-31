@@ -1,4 +1,5 @@
 import 'package:calendo/data/database.dart';
+import 'package:calendo/pages/new_todo.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
@@ -19,6 +20,17 @@ class _CalendarPageState extends State<CalendarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => NewTodo(),
+            ),
+          );
+        },
+        child: const Icon(Icons.add),
+      ),
       body: SfCalendar(
         view: CalendarView.week,
         firstDayOfWeek: 2,
