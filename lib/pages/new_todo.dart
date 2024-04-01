@@ -11,6 +11,7 @@ class NewTodo extends StatefulWidget {
 }
 
 class _NewTodoState extends State<NewTodo> {
+  Color todoColor = Colors.blue;
   DateTime selectedTimeBegin = DateTime.now();
   DateTime selectedTimeEnd = DateTime.now().add(
     const Duration(hours: 1),
@@ -44,6 +45,60 @@ class _NewTodoState extends State<NewTodo> {
     return Scaffold(
       appBar: AppBar(
         actions: [
+          PopupMenuButton(
+            itemBuilder: (BuildContext context) => [
+              PopupMenuItem(
+                height: 16,
+                child: Container(
+                  color: Colors.blue,
+                  height: 16,
+                ),
+              ),
+              PopupMenuItem(
+                height: 16,
+                child: Container(
+                  color: Colors.brown,
+                  height: 16,
+                ),
+              ),
+              PopupMenuItem(
+                height: 16,
+                child: Container(
+                  color: Colors.orange,
+                  height: 16,
+                ),
+              ),
+              PopupMenuItem(
+                height: 16,
+                child: Container(
+                  color: Colors.amber,
+                  height: 16,
+                ),
+              ),
+              PopupMenuItem(
+                height: 16,
+                child: Container(
+                  color: Colors.purple,
+                  height: 16,
+                ),
+              ),
+              PopupMenuItem(
+                height: 16,
+                child: Container(
+                  color: Colors.yellow,
+                  height: 16,
+                ),
+              ),
+            ],
+            icon: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: todoColor,
+              ),
+              width: 24,
+              height: 24,
+            ),
+          ),
           TextButton(
             onPressed: () {},
             child: const Text('Save'),
