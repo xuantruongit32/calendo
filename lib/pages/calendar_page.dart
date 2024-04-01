@@ -20,12 +20,6 @@ class _CalendarPageState extends State<CalendarPage> {
   }
 
   @override
-  void initState() {
-    Database().loadDatabase();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -56,10 +50,10 @@ class _CalendarPageState extends State<CalendarPage> {
 }
 
 List<Appointment> getTodo() {
-  if (Database().dynamicList.isEmpty) {
+  if (Database.dynamicList.isEmpty) {
     return Database.todo;
   } else {
-    for (var item in Database().dynamicList) {
+    for (var item in Database.dynamicList) {
       if (item is Appointment) {
         Database.todo.add(item);
       }
