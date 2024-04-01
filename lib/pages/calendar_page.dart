@@ -19,6 +19,26 @@ class _CalendarPageState extends State<CalendarPage> {
     Navigator.pop(context);
   }
 
+  void dragEnd(AppointmentDragEndDetails appointmentDragEndDetails) {
+    dynamic appointment = appointmentDragEndDetails.appointment!;
+    DateTime? droppingTime = appointmentDragEndDetails.droppingTime;
+
+    if (droppingTime != null && appointment != null) {
+      Duration appointmentDuration = appointment.endTime.difference(appointment.startTime);
+      DateTime newStartTime = droppingTime;
+      DateTime newEndTime = newStartTime.add(appointmentDuration);
+
+      for (int i = 0; i < Database.todo.length; i++) {
+        if (Database.todo[i].id == appointment.id) {
+          Database.todo[i].startTime = newStartTime;
+          Database.todo[i].endTime = newEndTime;
+          Database().updateDatabase();
+          break;
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +63,8 @@ class _CalendarPageState extends State<CalendarPage> {
         showNavigationArrow: true,
         showCurrentTimeIndicator: true,
         allowDragAndDrop: true,
+        allowAppointmentResize: true,
+        onDragEnd: dragEnd,
         dataSource: MeetingDataSource(getTodo()),
       ),
     );
