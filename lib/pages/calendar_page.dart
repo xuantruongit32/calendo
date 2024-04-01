@@ -39,6 +39,22 @@ class _CalendarPageState extends State<CalendarPage> {
     }
   }
 
+  void resizeEnd(AppointmentResizeEndDetails appointmentResizeEndDetails) {
+    dynamic appointment = appointmentResizeEndDetails.appointment;
+    DateTime? startTime = appointmentResizeEndDetails.startTime;
+    DateTime? endTime = appointmentResizeEndDetails.endTime;
+    if (appointment != null) {
+      for (var i = 0; i < Database.todo.length; i++) {
+        if (appointment.id == Database.todo[i].id) {
+          Database.todo[i].startTime = startTime!;
+          Database.todo[i].endTime = endTime!;
+          Database().updateDatabase();
+          break;
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,6 +81,7 @@ class _CalendarPageState extends State<CalendarPage> {
         allowDragAndDrop: true,
         allowAppointmentResize: true,
         onDragEnd: dragEnd,
+        onAppointmentResizeEnd: resizeEnd,
         dataSource: MeetingDataSource(getTodo()),
       ),
     );
