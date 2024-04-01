@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
 class NewTodo extends StatefulWidget {
@@ -9,7 +11,7 @@ class NewTodo extends StatefulWidget {
 }
 
 class _NewTodoState extends State<NewTodo> {
-  Color todoColor = Colors.blue;
+	  Color todoColor = Colors.blue;
   DateTime selectedTimeBegin = DateTime.now();
   DateTime selectedTimeEnd = DateTime.now().add(
     const Duration(hours: 1),
@@ -38,77 +40,12 @@ class _NewTodoState extends State<NewTodo> {
     }
   }
 
-  void _changeColorTodo(dynamic color) {
-    setState(() {
-      todoColor = color;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          PopupMenuButton(
-            onSelected: _changeColorTodo,
-            itemBuilder: (BuildContext context) => [
-              PopupMenuItem(
-                height: 16,
-                child: Container(
-                  color: Colors.blue,
-                  height: 16,
-                ),
-              ),
-              PopupMenuItem(
-                value: Colors.brown,
-                height: 16,
-                child: Container(
-                  color: Colors.brown,
-                  height: 16,
-                ),
-              ),
-              PopupMenuItem(
-                value: Colors.orange,
-                height: 16,
-                child: Container(
-                  color: Colors.orange,
-                  height: 16,
-                ),
-              ),
-              PopupMenuItem(
-                value: Colors.amber,
-                height: 16,
-                child: Container(
-                  color: Colors.amber,
-                  height: 16,
-                ),
-              ),
-              PopupMenuItem(
-                value: Colors.purple,
-                height: 16,
-                child: Container(
-                  color: Colors.purple,
-                  height: 16,
-                ),
-              ),
-              PopupMenuItem(
-                value: Colors.yellow,
-                height: 16,
-                child: Container(
-                  color: Colors.yellow,
-                  height: 16,
-                ),
-              ),
-            ],
-            icon: Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: todoColor,
-              ),
-              width: 24,
-              height: 24,
-            ),
-          ),
+			PopupMenuButton(itemBuilder: )
           TextButton(
             onPressed: () {},
             child: const Text('Save'),
