@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class NewTodo extends StatefulWidget {
-  const NewTodo({super.key});
+  const NewTodo({super.key, required this.addNewTodo});
+  final Function(Appointment appointment) addNewTodo;
 
   @override
   State<NewTodo> createState() => _NewTodoState();
@@ -110,7 +112,14 @@ class _NewTodoState extends State<NewTodo> {
             ),
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Appointment appointment = Appointment(
+                  startTime: selectedTimeBegin,
+                  endTime: selectedTimeEnd,
+                  subject: _titleController.text,
+                  color: todoColor);
+              widget.addNewTodo(appointment);
+            },
             child: const Text('Save'),
           ),
         ],

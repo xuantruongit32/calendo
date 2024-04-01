@@ -11,6 +11,14 @@ class CalendarPage extends StatefulWidget {
 }
 
 class _CalendarPageState extends State<CalendarPage> {
+  void _addNewTodo(Appointment appointment) {
+    setState(() {
+      Database.todo.add(appointment);
+    });
+    Database().updateDatabase();
+    Navigator.pop(context);
+  }
+
   @override
   void initState() {
     Database().loadDatabase();
@@ -25,7 +33,9 @@ class _CalendarPageState extends State<CalendarPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => NewTodo(),
+              builder: (context) => NewTodo(
+                addNewTodo: _addNewTodo,
+              ),
             ),
           );
         },
@@ -47,16 +57,6 @@ class _CalendarPageState extends State<CalendarPage> {
 
 List<Appointment> getTodo() {
   if (Database().dynamicList.isEmpty) {
-    Database.todo.add(
-      Appointment(
-        startTime: DateTime.now(),
-        endTime: DateTime.now().add(
-          Duration(hours: 2),
-        ),
-        color: Colors.blue,
-        subject: 'Test1',
-      ),
-    );
     return Database.todo;
   } else {
     for (var item in Database().dynamicList) {
